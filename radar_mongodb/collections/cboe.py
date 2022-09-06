@@ -2,6 +2,7 @@ from pymongo.database import Database
 from typing import TypedDict, List
 import datetime as dt
 
+
 class CBOEDocument(TypedDict):
     option: str
     bid: float
@@ -27,10 +28,12 @@ class CBOEDocument(TypedDict):
     percent_change: float
     prev_day_close: float
 
+
 class CBOEQueries:
-    def __init__(self, db: Database):
+    def __init__(self, db: Database, collection_name: str):
+        self.collection_name = collection_name
         self.collection = db["radar-cboe"]
-    
+
     def insert_many(self, documents: List[CBOEDocument]):
         row_date = dt.datetime.now(dt.timezone.utc)
         for i in range(len(documents)):
