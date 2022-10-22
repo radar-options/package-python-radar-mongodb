@@ -1,5 +1,5 @@
 from pymongo.database import Database
-from typing import TypedDict, List
+from typing import TypedDict, List, Optional
 import datetime as dt
 
 
@@ -34,14 +34,15 @@ class CBOEQueries:
         self.collection_name = collection_name
         self.collection = db["radar-cboe"]
 
-    def insert_many(self, documents: List[CBOEDocument]):
-        now = dt.datetime.now(dt.timezone.utc)
+    def insert_many(self, documents: List[CBOEDocument], now: Optional[dt.datetime] = None):
+        if now is None:
+            now = dt.datetime.now(dt.timezone.utc)
         row_date = dt.datetime(
             year = now.year,
             month = now.month,
             day = now.day,
             hour = now.hour,
-            minute = now.minute,
+            minute = (now.minute // 5) * 5,
             second = 0
         )
         for i in range(len(documents)):
