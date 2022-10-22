@@ -32,7 +32,6 @@ class OpenInterestQueries:
             minute=0,
             second=0,
         )
-        print(now)
         result = self.cboe_collection.aggregate(
             [
                 {
@@ -77,3 +76,16 @@ class OpenInterestQueries:
             self.open_interest_collection.insert_many(documents)
         else:
             print("No hay datos")
+
+    def find(self, date: dt.date):
+        return list(self.open_interest_collection.find(
+            filter = {
+                "datetime": dt.datetime.combine(
+                    date = date,
+                    time = dt.time.min
+                )
+            },
+            projection = {
+                "_id": False
+            }
+        ))
