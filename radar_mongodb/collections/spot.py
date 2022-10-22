@@ -14,12 +14,12 @@ class SpotQueries:
 
     def insert_many(self, document: SpotDocument, now: dt.datetime):
         row_date = dt.datetime(
-            year = now.year,
-            month = now.month,
-            day = now.day,
-            hour = now.hour,
-            minute = now.minute,
-            second = 0
+            year=now.year,
+            month=now.month,
+            day=now.day,
+            hour=now.hour,
+            minute=now.minute,
+            second=0,
         )
         document["row_date"] = row_date
         return self.collection.insert_one(document)

@@ -34,16 +34,18 @@ class CBOEQueries:
         self.collection_name = collection_name
         self.collection = db["radar-cboe"]
 
-    def insert_many(self, documents: List[CBOEDocument], now: Optional[dt.datetime] = None):
+    def insert_many(
+        self, documents: List[CBOEDocument], now: Optional[dt.datetime] = None
+    ):
         if now is None:
             now = dt.datetime.now(dt.timezone.utc)
         row_date = dt.datetime(
-            year = now.year,
-            month = now.month,
-            day = now.day,
-            hour = now.hour,
-            minute = (now.minute // 5) * 5,
-            second = 0
+            year=now.year,
+            month=now.month,
+            day=now.day,
+            hour=now.hour,
+            minute=(now.minute // 5) * 5,
+            second=0,
         )
         for i in range(len(documents)):
             documents[i]["row_date"] = row_date
