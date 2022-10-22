@@ -29,13 +29,14 @@ class OpenInterestQueries:
             month=now.month,
             day=now.day,
             hour=now.hour,
-            minute=now.minute,
+            minute=0,
             second=0,
         )
+        print(now)
         result = self.cboe_collection.aggregate(
             [
                 {
-                    "$match": {"row_date": now - dt.timedelta(seconds=15 * 60)},
+                    "$match": {"row_date": now - dt.timedelta(seconds=60 * 60)},
                 },
                 {
                     "$project": {
