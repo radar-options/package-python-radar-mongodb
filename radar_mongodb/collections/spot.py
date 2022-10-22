@@ -12,8 +12,7 @@ class SpotQueries:
         self.collection_name = collection_name
         self.collection = db["radar-spot"]
 
-    def insert_many(self, document: SpotDocument):
-        now = dt.datetime.now(dt.timezone.utc)
+    def insert_many(self, document: SpotDocument, now: dt.datetime):
         row_date = dt.datetime(
             year = now.year,
             month = now.month,
