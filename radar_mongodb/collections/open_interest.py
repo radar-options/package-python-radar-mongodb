@@ -68,8 +68,11 @@ class OpenInterestQueries:
             ]
         )
         documents = list(result)
-        for i in range(len(documents)):
-            documents[i]["datetime"] = dt.datetime(
-                year=now.year, month=now.month, day=now.day, hour=0, minute=0, second=0
-            )
-        self.open_interest_collection.insert_many(documents)
+        if len(documents) != 0:
+            for i in range(len(documents)):
+                documents[i]["datetime"] = dt.datetime(
+                    year=now.year, month=now.month, day=now.day, hour=0, minute=0, second=0
+                )
+            self.open_interest_collection.insert_many(documents)
+        else:
+            print("No hay datos")
