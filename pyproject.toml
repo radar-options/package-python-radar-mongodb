@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "radar-mongodb"
-version = "0.2.1"
+version = "0.2.2"
 description = ""
 authors = ["Ernesto Martinez del Pino <ernestomar1997@hotmail.com>"]
 
